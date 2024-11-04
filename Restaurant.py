@@ -3,8 +3,7 @@ class Restaurant:
     Price: float
     Vegan: bool
     Region: str
-    Type: []
-
+    #Type: []
     def __init__(self, name: str, price: float, vegan: bool, region: str):
         self.Name = name
         self.Price = price
