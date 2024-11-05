@@ -17,5 +17,5 @@ def create_restaurant():
     if Region == 0:
         Region = None
     fv = open('restaurants.txt', 'a', encoding = 'utf-8')
-    fv.write(f'{Name},{Price},{Vegan},{Region}')
+    fv.write(f'{Name},{Price},{Vegan},{Region}\n')
     return
