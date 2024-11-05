@@ -1,1 +1,1 @@
-Church's,13.13,False,Texas
+Church's,13.13,False,TexasGoose,12.0,True,Canada
