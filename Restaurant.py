@@ -1,6 +1,8 @@
+"""Contains the Restaurant class that goes into the restaurant_list"""
 from typing import Self, Union
 
 class Restaurant:
+    """Holds infromation about each restaurant"""
     name: str
     price: float
     vegan: bool
@@ -15,28 +17,34 @@ class Restaurant:
         self.type = type
 
     def clone(self) -> Self:
-        return Restaurant(self.name, self.price, self.vegan, self.region)
+        """creates a copy of the current restaurant object"""
+        return Restaurant(self.name, self.price, self.vegan, self.region, self.type)
 
     @property
     def name(self) -> str:
+        """Name of the restaurant"""
         return self.name
-    
+
     @property
     def price(self) -> float:
+        """Average price of the restaurant"""
         return self.price
-    
+
     @property
     def vegan(self) -> bool:
+        """Tells if the restaurant is vegan"""
         return self.vegan
-    
+
     @property
     def region(self) -> str:
+        """The region the food is from"""
         return self.region
-    
+
     @property
     def type(self) -> list[str]:
+        """other attributes of the restaurant"""
         return self.type
-    
+
     @name.setter
     def set_name(self, new_name:str) -> None:
         self.name = new_name
@@ -58,9 +66,5 @@ class Restaurant:
         self.type = new_types
 
     def appendType(self, new_type: str) -> None:
+        """Adds a new attribute to the restaurant"""
         self.type.append(new_type)
-
-    
-
-        
-
