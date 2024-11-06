@@ -1,30 +1,66 @@
+from typing import Self, Union
+
 class Restaurant:
-    Name: str
-    Price: float
-    Vegan: bool
-    Region: str
-    #Type: []
-    def __init__(self, name: str, price: float, vegan: bool, region: str):
-        self.Name = name
-        self.Price = price
-        self.Vegan = vegan
-        self.Region = region
+    name: str
+    price: float
+    vegan: bool
+    region: str
+    type: list[str]
 
-    def getName(self):
-        return self.Name
+    def __init__(self, name: str, price: float, vegan: bool, region: str, type: list[str]):
+        self.name = name
+        self.price = price
+        self.vegan = vegan
+        self.region = region    
+        self.type = type
+
+    def clone(self) -> Self:
+        return Restaurant(self.name, self.price, self.vegan, self.region)
+
+    @property
+    def name(self) -> str:
+        return self.name
     
-    def getPrice(self):
-        return self.Price
+    @property
+    def price(self) -> float:
+        return self.price
     
-    def getVegan(self):
-        return self.Vegan
+    @property
+    def vegan(self) -> bool:
+        return self.vegan
     
-    def getRegion(self):
-        return self.Region
+    @property
+    def region(self) -> str:
+        return self.region
     
-    def setName(self, newName:str) -> None:
-        self.Name = newName
+    @property
+    def type(self) -> list[str]:
+        return self.type
+    
+    @name.setter
+    def set_name(self, new_name:str) -> None:
+        self.name = new_name
+
+    @price.setter
+    def set_price(self, new_price:float) -> None:
+        self.price = new_price
+
+    @vegan.setter
+    def set_vegan(self, is_vegan: bool) -> None:
+        self.vegan = is_vegan
+
+    @region.setter  
+    def set_region(self, new_region: str) -> None:
+        self.region = new_region
+
+    @type.setter
+    def set_type(self, new_types: list[str]) -> None: 
+        self.type = new_types
+
+    def appendType(self, new_type: str) -> None:
+        self.type.append(new_type)
 
     
+
         
 
