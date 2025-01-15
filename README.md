@@ -1,2 +1,2 @@
 # Restaurant-Random
-Gives a random restaurant matching provided creteria from a list of known restaurants
+This program allows users to build their own database of their favorite places to eat and when the user needs help making decisions, the program can help the user make said decisions based on what type(s) of food they want, their budget, and many other criteria, we hope users will share this program with those around them to build a local database of restaurants and foster a strong sense of community.
