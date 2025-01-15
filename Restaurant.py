@@ -16,6 +16,25 @@ class Restaurant:
 
     def clone(self) -> Self:
         return Restaurant(self.name, self.price, self.vegan, self.region)
+    
+    def __str__(self):
+        '''
+        Prints a list of restaurant attributes
+        Use: print(source)
+        Use: s = str(source)
+        '''
+        if self.vegan:
+            veg_status = 'Vegan'
+        else:
+            veg_status = 'Not Vegan'
+        print('''Restaurant:
+        Name: {self.name}
+        Price: {self.price}
+        {veg_status}
+        Region: {self.region}
+        Type: {self.type}
+              ''')
+        return
 
     @property
     def name(self) -> str:
