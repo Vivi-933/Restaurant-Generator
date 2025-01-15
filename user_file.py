@@ -9,7 +9,7 @@ fv = open('restaurants.txt', 'r', encoding = 'utf-8')
 # Constants
 OPTIONS = ['create restaurant', 'view restaurant', 'find restaurant(all)', 'find restaurant(random)']
 CRITERIA = ['price', 'vegan', 'origin', 'type']
-CRIT_LST = [price, vegan, origin, type]
+
 
 def end():
         cont = input('Would you like to do anything else? (Y/N) ')
@@ -36,14 +36,16 @@ def run():
     elif result == 1:
             name = input('Name: ')
             line = fv.readline()
+            found = False
             while line != '':
-                    attributes = line.split('|')
+                    attributes = line.split(',')
                     line = fv.readline()
                     if attributes[0] == name:
                             line = ''
-                            found = True 
-                            res = Restaurant(attributes)
-            if found:
+                            found = True
+                            res = Restaurant(attributes[0], attributes[1], attributes[2], attributes[3], attributes[4])
+                            print(res)              
+            if found is True:
                     print(res)
 
             else:
@@ -63,7 +65,7 @@ def run():
             if criterion != 3:
                 line = fv.readline()
                 while line != '':
-                        attributes = line.split('|')
+                        attributes = line.split(',')
                         line = fv.readline()
                         if attributes[criterion] == filt:
                                 found = True 
@@ -88,7 +90,7 @@ def run():
             if criterion != 3:
                 line = fv.readline()
                 while line != '':
-                        attributes = line.split('|')
+                        attributes = line.split(',')
                         line = fv.readline()
                         if attributes[criterion] == filt:
                                 found = True 

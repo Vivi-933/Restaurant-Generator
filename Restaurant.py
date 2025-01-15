@@ -1,4 +1,4 @@
-from typing import Self, Union
+from typing import Union
 
 class Restaurant:
     name: str
@@ -14,7 +14,7 @@ class Restaurant:
         self.region = region  
         self.type = type
 
-    def clone(self) -> Self:
+    def clone(self):
         return Restaurant(self.name, self.price, self.vegan, self.region)
     
     def __str__(self):

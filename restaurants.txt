@@ -1,2 +1,1 @@
-Church's,13.13,False,Texas
-Goose,12.0,True,Canada
+Goose,12.0,True,CanadaChurch's,12.0,False,USA, [['chicken', ' fries', ' biscuits']]
