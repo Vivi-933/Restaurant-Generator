@@ -16,6 +16,10 @@ def create_restaurant():
     Region = input('Origin: ')
     if Region == 0:
         Region = None
+    type = []
+    result = input('Food types(seperate by comma): ')
+    type.append(result.split(','))
     fv = open('restaurants.txt', 'a', encoding = 'utf-8')
-    fv.write(f'{Name},{Price},{Vegan},{Region}\n')
+    fv.write(f'{Name},{Price},{Vegan},{Region}, {type}\n')
+    fv.close()
     return

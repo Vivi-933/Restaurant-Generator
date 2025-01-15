@@ -11,7 +11,7 @@ class Restaurant:
         self.name = name
         self.price = price
         self.vegan = vegan
-        self.region = region    
+        self.region = region  
         self.type = type
 
     def clone(self) -> Self:
