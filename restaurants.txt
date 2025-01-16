@@ -1,1 +1,4 @@
-Goose,12.0,True,CanadaChurch's,12.0,False,USA, [['chicken', ' fries', ' biscuits']]
+Goose|12.0|True|Canada|[['Goose', 'Eggs']]
+Penny's Hot Chicken|15.0|False|USA|[['Chicken']]
+Church's|13.0|False|USA|[['Chicken', 'Biscuits']]
+City Pizza|15.0|True|Italy|Pizza, Wings

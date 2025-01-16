@@ -17,6 +17,7 @@ def end():
                 run()
         else:
                 print('Have a great day!!')
+                fv.close()
         return
 
 def create_menu():
@@ -29,54 +30,59 @@ def run():
     for i in range(len(OPTIONS)):
                 print(i, OPTIONS[i])
     result = int(input('option: '))
+    print()
 
     if result == 0:
             create_menu()
 
     elif result == 1:
-            name = input('Name: ')
-            line = fv.readline()
-            found = False
-            while line != '':
-                    attributes = line.split(',')
-                    line = fv.readline()
-                    if attributes[0] == name:
-                            line = ''
-                            found = True
-                            res = Restaurant(attributes[0], attributes[1], attributes[2], attributes[3], attributes[4])
-                            print(res)              
-            if found is True:
-                    print(res)
-
-            else:
-                    add = input('''no such restaurant exists.
+                name = input('Name: ')
+                print()
+                line = fv.readline()
+                found = False
+                while line != '':
+                        attributes = line.split('|')
+                        line = fv.readline()
+                        if attributes[0] == name:
+                                line = ''
+                                found = True
+                                res = Restaurant(attributes[0], attributes[1], attributes[2], attributes[3], attributes[4])
+                                print(res)              
+                if found is False:
+                        add = input('''no such restaurant exists.
                         Would you like to add it?(Y/N) ''')
-                    if add == 'Y':
-                            create_menu()
-                    else:
+                        if add == 'Y':
+                                create_menu()
+                        else:
+                                end()
+                else:
                         end()
+
     elif result == 2:
             print('What criterion would you like to filter by? ')
-            for i in range(len(CRITERIA)):
-                print(i, CRITERIA[i])
+            for i, crit in enumerate(CRITERIA):
+                print(f'{i+1}: {crit}')
             criterion = int(input('Option: '))
-            assert criterion < 4, 'Not an option'
+            assert criterion < 5, 'Not an option'
             filt = input('Criteria: ')
-            if criterion != 3:
+            found = False
+            if criterion != 4:
                 line = fv.readline()
                 while line != '':
-                        attributes = line.split(',')
-                        line = fv.readline()
+                        attributes = line.split('|')
                         if attributes[criterion] == filt:
-                                found = True 
-                                res = Restaurant(attributes)
-                                print(res)
-                if not found:
-                    add = input('''no such restaurant exists.
-                        Would you like to add it?(Y/N) ''')
-                    if add == 'Y':
-                            create_menu()
-                    else:
+                                found = True
+                                res = Restaurant(attributes[0], attributes[1], attributes[2], attributes[3], attributes[4])
+                                print(res)     
+                        line = fv.readline()      
+                if found is False:
+                        print('no such restaurant exists.')
+                        add = input('Would you like to add it?(Y/N) ')
+                        if add == 'Y':
+                                create_menu()
+                        else:
+                                end()
+                else:
                         end()
                         
     elif result == 3:
@@ -90,7 +96,7 @@ def run():
             if criterion != 3:
                 line = fv.readline()
                 while line != '':
-                        attributes = line.split(',')
+                        attributes = line.split('|')
                         line = fv.readline()
                         if attributes[criterion] == filt:
                                 found = True 
