@@ -20,75 +20,69 @@ def end():
                 fv.close()
         return
 
+def generate():
+    # creates list of restaurant objects
+    line = fv.readline()
+    res_list = []
+    while line != '':
+        attributes = line.split('|')
+        res_list.append(Restaurant(attributes[0], attributes[1], attributes[2], attributes[3], attributes[4]))
+        line = fv.readline()
+    return(res_list)
+
 def create_menu():
         create_restaurant()
         end()
         return
 
-def run():
+def run():    
     print('What would you like to do?')
-    for i in range(len(OPTIONS)):
-                print(i, OPTIONS[i])
+    for i, opt in enumerate(OPTIONS):
+        print(f'{i}: {opt}')
     result = int(input('option: '))
     print()
 
+    # brings up restaurant creation menu
     if result == 0:
-            create_menu()
+        create_menu()
 
+    # asks user to search for restaurant by name
     elif result == 1:
-                name = input('Name: ')
-                print()
-                line = fv.readline()
-                found = False
-                while line != '':
-                        attributes = line.split('|')
-                        line = fv.readline()
-                        if attributes[0] == name:
-                                line = ''
-                                found = True
-                                res = Restaurant(attributes[0], attributes[1], attributes[2], attributes[3], attributes[4])
-                                print(res)              
-                if found is False:
-                        add = input('''no such restaurant exists.
-                        Would you like to add it?(Y/N) ''')
-                        if add == 'Y':
-                                create_menu()
-                        else:
-                                end()
+        name = input('Name: ')
+        print()
+        line = fv.readline()
+        found = False
+        for i in res_list:
+            if i.name() == name:
+                print(i)
+                break
+            if found is False:
+                add = input('''no such restaurant exists.
+Would you like to add it?(Y/N) ''')
+                if add == 'Y':
+                    create_menu()
                 else:
-                        end()
+                    end()
 
     elif result == 2:
-            print('What criterion would you like to filter by? ')
-            for i, crit in enumerate(CRITERIA):
-                print(f'{i+1}: {crit}')
-            criterion = int(input('Option: '))
-            assert criterion < 5, 'Not an option'
-            filt = input('Criteria: ')
-            found = False
-            if criterion != 4:
-                line = fv.readline()
-                while line != '':
-                        attributes = line.split('|')
-                        if attributes[criterion] == filt:
-                                found = True
-                                res = Restaurant(attributes[0], attributes[1], attributes[2], attributes[3], attributes[4])
-                                print(res)     
-                        line = fv.readline()      
-                if found is False:
-                        print('no such restaurant exists.')
-                        add = input('Would you like to add it?(Y/N) ')
-                        if add == 'Y':
-                                create_menu()
-                        else:
-                                end()
-                else:
-                        end()
+        print('What criterion would you like to filter by? ')
+
+        # prints options menu
+        for i, crit in enumerate(CRITERIA):
+            print(f'{i+1}: {crit}')
+        # ask user what to filter by    
+        criterion = int(input('Option: '))
+        assert criterion < 5, 'Not an option'
+        filt = input('Filter by: ')
+        # initialize found variable
+        found = False
+
+
                         
     elif result == 3:
             print('What criterion would you like to filter by? ')
-            for i in range(len(CRITERIA)):
-                print(i, CRITERIA[i])
+            for i, crit in enumerate(CRITERIA):
+                print(f'{i+1}: {crit}')
             criterion = int(input('Option: '))
             assert criterion < 4, 'Not an option'
             filt = input('Criteria: ')
@@ -114,5 +108,7 @@ def run():
                        pick = restaurants[rand]
                        print(pick)
                        end()
+
+res_list = generate()
 run()
 fv.close()
