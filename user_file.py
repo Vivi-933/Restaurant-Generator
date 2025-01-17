@@ -134,7 +134,10 @@ def option3():
     for i in res_list:
         if i == filt:
             found = True
-            print(i)
+            matches.append(i)
+    ran = randint(0,len(matches)-1)
+    pick = matches[ran]
+    print(res)
     if found is False:
         add = input('''no such restaurant exists.
 Would you like to add it?(Y/N) ''')
