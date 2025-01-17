@@ -2,3 +2,4 @@ Goose|12.0|True|Canada|[['Goose', 'Eggs']]
 Penny's Hot Chicken|15.0|False|USA|[['Chicken']]
 Church's|13.0|False|USA|[['Chicken', 'Biscuits']]
 City Pizza|15.0|True|Italy|Pizza, Wings
+Foodie Fruitie|13.0|True|Japan|sushi,boba,springrolls
