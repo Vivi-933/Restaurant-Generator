@@ -54,40 +54,23 @@ def run():
         print(f'{i}: {opt}')
     result = int(input('option: '))
     print()
-
     # brings up restaurant creation menu
     if result == 0:
         create_menu()
-
     # asks user to search for restaurant by name
-
+    if result == 1:
+        option1()
+    # Brings up all restaurants matching user filter
     elif result == 2:
         print('What criterion would you like to filter by? ')
-
-        # prints options menu
-        for i, crit in enumerate(CRITERIA):
-            print(f'{i}: {crit}')
-
-        # ask user what to filter by
-        criterion = int(input('Option: '))
-        assert criterion in range(0,4)
-        # ask user what to filter by
-        filt = input('Filter by: ')
-        # initialize found variable
-        found = False
-        for i in res_list:
-            if i == filt:
-                print(i)
-
+    # brings up a random restaurant matching user filter
     elif result == 3:
-        print('What criterion would you like to filter by? ')
-        for i, crit in enumerate(CRITERIA):
-            print(f'{i+1}: {crit}')
-        criterion = int(input('Option: '))
-        assert criterion < 4, 'Not an option'
-        filt = input('Criteria: ')
+        option3()
 
 def option1():
+    '''
+    Searches for restaurant for user
+    '''
     name = input('Name: ')
     print()
     found = False
@@ -104,6 +87,63 @@ Would you like to add it?(Y/N) ''')
                 create_menu()
             else:
                 end()
+        else:
+            end()
+
+def option2():
+    '''
+    Brings up restaurants matching user's criteria
+    '''
+    for i, crit in enumerate(CRITERIA):
+        print(f'{i}: {crit}')
+    # ask user what to filter by
+    criterion = int(input('Option: '))
+    assert criterion in range(0,4)
+    # ask user what to filter by
+    filt = input('Filter by: ')
+    # initialize found variable
+    found = False
+    for i in res_list:
+        if i == filt:
+            found = True
+            print(i)
+    # lets user create restaurant if desired one doesn't exist
+    if found is False:
+        add = input('''no such restaurant exists.
+Would you like to add it?(Y/N) ''')
+        if add == 'Y':
+            create_menu()
+        else:
+            end()
+    else:
+        end()
+
+
+def option3():
+    '''
+    Brings up random restaurant matching user filter
+    '''
+    print('What criterion would you like to filter by? ')
+    for i, crit in enumerate(CRITERIA):
+        print(f'{i+1}: {crit}')
+    criterion = int(input('Option: '))
+    assert criterion < 4, 'Not an option'
+    filt = input('Criteria: ')
+    matches = []
+    found = False
+    for i in res_list:
+        if i == filt:
+            found = True
+            print(i)
+    if found is False:
+        add = input('''no such restaurant exists.
+Would you like to add it?(Y/N) ''')
+        if add == 'Y':
+            create_menu()
+        else:
+            end()
+    else:
+        end()
 
 res_list = generate()
 run()
