@@ -3,3 +3,4 @@ Penny's Hot Chicken|15.0|False|USA|[['Chicken']]
 Church's|13.0|False|USA|[['Chicken', 'Biscuits']]
 City Pizza|15.0|True|Italy|Pizza, Wings
 Foodie Fruitie|13.0|True|Japan|sushi,boba,springrolls
+Mel's Diner|16.0|True|USA|Chicken, Breakfast, Milkshakes

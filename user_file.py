@@ -9,16 +9,16 @@ fv = open('restaurants.txt', 'r', encoding = 'utf-8')
 # Constants
 OPTIONS = ['create restaurant', 'view restaurant',
             'find restaurant(all)', 'find restaurant(random)']
-CRITERIA = ['price', 'vegan', 'origin', 'type']
+CRITERIA = ['price', 'vegan', 'region', 'type']
 
 
-def end():
+def end(res_list):
     '''
     Gives user option to end or continue program
     '''
     cont = input('Would you like to do anything else? (Y/N) ')
     if cont == 'Y':
-        run()
+        run(res_list)
     else:
         print('Have a great day!!')
         fv.close()
@@ -42,10 +42,10 @@ def create_menu():
     lets user add a restaurant to the restaurant file
     '''
     create_restaurant()
-    end()
+    end(res_list)
 
 
-def run():
+def run(res_list):
     '''
     Lets user run the program
     '''   
@@ -59,15 +59,16 @@ def run():
         create_menu()
     # asks user to search for restaurant by name
     if result == 1:
-        option1()
+        option1(res_list)
     # Brings up all restaurants matching user filter
     elif result == 2:
         print('What criterion would you like to filter by? ')
+        option2(res_list)
     # brings up a random restaurant matching user filter
     elif result == 3:
-        option3()
+        option3(res_list)
 
-def option1():
+def option1(res_list):
     '''
     Searches for restaurant for user
     '''
@@ -86,11 +87,11 @@ Would you like to add it?(Y/N) ''')
             if add == 'Y':
                 create_menu()
             else:
-                end()
+                end(res_list)
         else:
-            end()
+            end(res_list)
 
-def option2():
+def option2(res_list):
     '''
     Brings up restaurants matching user's criteria
     '''
@@ -102,24 +103,34 @@ def option2():
     # ask user what to filter by
     filt = input('Filter by: ')
     # initialize found variable
-    found = False
-    for i in res_list:
-        if i == filt:
-            found = True
+    matches = []
+    if criterion == 1:
+        filt = float(filt)
+        matches = match_price(filt, res_list)
+    elif criterion == 2:
+        filt = bool(filt)
+        matches = match_vegan(filt, res_list)
+    elif criterion == 3:
+        matches = match_region(filt, res_list)
+    elif criterion == 4:
+        matches = match_type(filt, res_list)
+    else:
+        print('Not an option')
+        end(res_list)
+    if matches != []:
+        for i in matches:
             print(i)
-    # lets user create restaurant if desired one doesn't exist
-    if found is False:
+        end(res_list)
+    else:
         add = input('''no such restaurant exists.
 Would you like to add it?(Y/N) ''')
         if add == 'Y':
             create_menu()
         else:
-            end()
-    else:
-        end()
+            end(res_list)
 
 
-def option3():
+def option3(res_list):
     '''
     Brings up random restaurant matching user filter
     '''
@@ -127,27 +138,75 @@ def option3():
     for i, crit in enumerate(CRITERIA):
         print(f'{i+1}: {crit}')
     criterion = int(input('Option: '))
-    assert criterion < 4, 'Not an option'
-    filt = input('Criteria: ')
+    filt = input('Filter by: ')
+    print()
     matches = []
-    found = False
-    for i in res_list:
-        if i == filt:
-            found = True
-            matches.append(i)
-    ran = randint(0,len(matches)-1)
-    pick = matches[ran]
-    print(res)
-    if found is False:
+    if criterion == 1:
+        filt = float(filt)
+        matches = match_price(filt, res_list)
+    elif criterion == 2:
+        filt = bool(filt)
+        matches = match_vegan(filt, res_list)
+    elif criterion == 3:
+        matches = match_region(filt, res_list)
+    elif criterion == 4:
+        matches = match_type(filt, res_list)
+    else:
+        print('Not an option')
+        end(res_list)
+    if matches != []:
+        ran = randint(0,len(matches)-1)
+        res = matches[ran]
+        print(res)
+        end(res_list)
+    else:
         add = input('''no such restaurant exists.
 Would you like to add it?(Y/N) ''')
         if add == 'Y':
             create_menu()
         else:
-            end()
-    else:
-        end()
+            end(res_list)
+
+def match_price(price,res_list):
+    '''
+    use: matches = match_price(price, res_list)
+    '''
+    matches = []
+    for i in res_list:
+        if i.price <= price:
+            matches.append(i)
+    return matches
+
+def match_vegan(vegan,res_list):
+    '''
+    use: matches = match_vegan(veg,res_list)
+    '''
+    matches = []
+    for i in res_list:
+        if i.vegan == vegan:
+            matches.append(i)
+    return matches
+
+def match_region(region,res_list):
+    '''
+    use: matches = match_region(price,res_list
+    '''
+    matches = []
+    for i in res_list:
+        if i.region == region:
+            matches.append(i)
+    return matches
+
+def match_type(typ,res_list):
+    '''
+    use: matches = match_type(price,res_list)
+    '''
+    matches = []
+    for i in res_list:
+        if typ in i.type:
+            matches.append(i)
+    return matches
 
 res_list = generate()
-run()
+run(res_list)
 fv.close()
